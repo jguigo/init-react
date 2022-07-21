@@ -1,40 +1,48 @@
 import React from "react";
 
-const titulo = <h1>Esse é um titulo</h1>;
+const larissa = {
+   cliente: "Larissa",
+   idade: 26,
+   compras: [
+      { nome: "Notebook", preco: "R$ 2500" },
+      { nome: "Geladeira", preco: "R$ 3000" },
+      { nome: "Smartphone", preco: "R$ 1500" },
+   ],
+   ativa: true,
+};
+
+const guilherme = {
+   cliente: "Guilherme",
+   idade: 31,
+   compras: [
+      { nome: "Notebook", preco: "R$ 2500" },
+      { nome: "Geladeira", preco: "R$ 3000" },
+      { nome: "Smartphone", preco: "R$ 1500" },
+      { nome: "Guitarra", preco: "R$ 3500" },
+   ],
+   ativa: false,
+};
 
 const App = () => {
+   const user = larissa;
 
-   const ativo = true;
-   const random = Math.random();
-
-   function mostrarNome(sobrenome) {
-      return "Guilherme " + sobrenome;
-   }
-
-   const carro = {
-      marca: "Ford",
-      rodas: "4",
-   };
-
-   const estiloP = {
-      color: 'blue',
-      fontSize: "2.5rem"
-
-   }
+   const totalGastos = user.compras
+      .map((item) => Number(item["preco"].split(" ")[1]))
+      .reduce((a, b) => a + b);
 
    return (
       <>
-         {titulo}
+         <p>Nome: {user.cliente}</p>
+         <p>idade: {user.idade}</p>
          <p>
-            {true ? "teste" : "testen"} - {10}
-            {mostrarNome("Melo")}
+            Situação:{" "}
+            <span style={{ color: user.ativa ? "green" : "red" }}>
+               {user.ativa ? "Ativa" : "Inativa"}
+            </span>
          </p>
-         <p style={estiloP}>{new Date().getFullYear()}</p>
-         <p>{carro.marca}</p>
-         <p>{carro.rodas}</p>
-         <p className={ativo ? "ativo" : "inativo"}>{random * 1000}</p>
+         <p>Total gasto: {totalGastos}</p>
+         {totalGastos > 10000 && <p>Você esta gastando muito!"</p>}
       </>
    );
 };
-
 export default App;
