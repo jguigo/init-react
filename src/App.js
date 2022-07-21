@@ -1,48 +1,49 @@
 import React from "react";
 
-const larissa = {
-   cliente: "Larissa",
-   idade: 26,
-   compras: [
-      { nome: "Notebook", preco: "R$ 2500" },
-      { nome: "Geladeira", preco: "R$ 3000" },
-      { nome: "Smartphone", preco: "R$ 1500" },
-   ],
-   ativa: true,
-};
-
-const guilherme = {
-   cliente: "Guilherme",
-   idade: 31,
-   compras: [
-      { nome: "Notebook", preco: "R$ 2500" },
-      { nome: "Geladeira", preco: "R$ 3000" },
-      { nome: "Smartphone", preco: "R$ 1500" },
-      { nome: "Guitarra", preco: "R$ 3500" },
-   ],
-   ativa: false,
-};
+const produtos = [
+   {
+      id: 1,
+      nome: "Smartphone",
+      preco: "R$ 2000",
+      cores: ["#29d8d5", "#252a34", "#fc3766"],
+   },
+   {
+      id: 3,
+      nome: "Notebook",
+      preco: "R$ 3000",
+      cores: ["#ffd045", "#d4394b", "#f37c59"],
+   },
+   {
+      id: 3,
+      nome: "Tablet",
+      preco: "R$ 1500",
+      cores: ["#365069", "#47c1c8", "#f95786"],
+   },
+];
 
 const App = () => {
-   const user = larissa;
-
-   const totalGastos = user.compras
-      .map((item) => Number(item["preco"].split(" ")[1]))
-      .reduce((a, b) => a + b);
+   const dados = produtos.filter(({ preco }) =>
+      Number(preco.replace("R$ ", "") > 1500)
+   );
 
    return (
-      <>
-         <p>Nome: {user.cliente}</p>
-         <p>idade: {user.idade}</p>
-         <p>
-            Situação:{" "}
-            <span style={{ color: user.ativa ? "green" : "red" }}>
-               {user.ativa ? "Ativa" : "Inativa"}
-            </span>
-         </p>
-         <p>Total gasto: {totalGastos}</p>
-         {totalGastos > 10000 && <p>Você esta gastando muito!"</p>}
-      </>
+      <section>
+         {dados.map(({ id, nome, preco, cores }) => (
+            <div key={id}>
+               <h1>{nome}</h1>
+               <p>Preço: {preco}</p>
+               <ul>
+                  {cores.map((cor) => (
+                     <li
+                        key={cor}
+                        style={{ backgroundColor: cor, color: "#fff" }}>
+                        {cor}
+                     </li>
+                  ))}
+               </ul>
+            </div>
+         ))}
+      </section>
    );
 };
 export default App;
