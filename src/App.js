@@ -1,21 +1,20 @@
 import React from "react";
-import ButtonModal from "./ButtonModal";
-import { Modal } from "./Modal";
 
 const App = () => {
-   const [modal, setModal] = React.useState(false);
-   const [items, setItems] = React.useState('Teste');
+   const [contar, setContar] = React.useState(0);
+   const [items, setItems] = React.useState([]);
 
-   function handleClick(){
-      setItems("outros")
+   function handleClick() {
+      setContar((contar) => contar + 1);
+      setItems((items) => [...items, "Item " + (contar + 1)]);
    }
 
    return (
       <div>
-         <p>{items}</p>
-         <button onClick={handleClick}>Clicar</button>
-         <Modal modal={modal} setModal={setModal} />
-         <ButtonModal setModal={setModal} />
+         <button onClick={handleClick}>{contar}</button>
+         {items.map((item) => (
+            <li key={item}>{item}</li>
+         ))}
       </div>
    );
 };
