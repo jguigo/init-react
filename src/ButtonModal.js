@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
 
-const ButtonModal = ({setModal}) => {
-  return (
-    <button onClick={() => setModal(true)}>Abrir</button>
-  )
-}
+const ButtonModal = ({ setModal }) => {
+   function handleClick() {
+    //é possivel pegar o valor anterior sem ele ter sido passo! Basta utilizar o parâmetro do "setAlgumaCoisa"
+      setModal((ativo) => !ativo);
+   }
 
-export default ButtonModal
+   return <button onClick={handleClick}>Abrir</button>;
+};
+
+export default ButtonModal;
