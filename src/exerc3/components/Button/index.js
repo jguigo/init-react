@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
 
-const Button = ({nome}) => {
-  return (
-    <button>{nome}</button>
-  )
-}
+const Button = ({ name, setPreferencia }) => {
+   function handleClick({ target }) {
+      const buttonName = target.innerText;
+      setPreferencia(buttonName);
+   }
 
-export default Button
+   return <button onClick={handleClick}>{name}</button>;
+};
+
+export default Button;
